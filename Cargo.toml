@@ -1,0 +1,17 @@
+[package]
+name = "l10n-examples"
+version = "0.1.0"
+description = "Examples for the l10n crate."
+authors = ["Mathieu Tricoire <mathieu@tricoi.re>"]
+license = "MIT OR Apache-2.0"
+homepage = "https://github.com/MathieuTricoire/l10n-examples"
+repository = "https://github.com/MathieuTricoire/l10n-examples"
+readme = "README.md"
+categories = ["localization", "internationalization"]
+keywords = ["l10n", "localization", "i18n", "internationalization", "macros"]
+edition = "2021"
+rust-version = "1.56"
+
+[dependencies]
+fluent-pseudo = "0.3"
+l10n = { git = "https://github.com/MathieuTricoire/l10n" }
