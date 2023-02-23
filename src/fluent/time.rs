@@ -85,23 +85,27 @@ impl TimeFormatter {
         } else if seconds < 60 * 60 {
             let minutes = seconds / 60;
             let seconds = seconds - minutes * 60;
-            let seconds = match seconds {
-                0 => String::new(),
-                seconds => format!("{seconds:02}"),
-            };
-            TimeFormatterValues::Minutes { minutes, seconds }
-                .translate(&self.lang)
-                .to_string()
+            match seconds {
+                0 => TimeFormatterValues::Minutes { minutes },
+                seconds => TimeFormatterValues::MinutesSeconds {
+                    minutes,
+                    seconds: format!("{seconds:02}"),
+                },
+            }
+            .translate(&self.lang)
+            .to_string()
         } else {
             let hours = seconds / 60 / 60;
             let minutes = seconds / 60 - hours * 60;
-            let minutes = match minutes {
-                0 => String::new(),
-                minutes => format!("{minutes:02}"),
-            };
-            TimeFormatterValues::Hours { hours, minutes }
-                .translate(&self.lang)
-                .to_string()
+            match minutes {
+                0 => TimeFormatterValues::Hours { hours },
+                minutes => TimeFormatterValues::HoursMinutes {
+                    hours,
+                    minutes: format!("{minutes:02}"),
+                },
+            }
+            .translate(&self.lang)
+            .to_string()
         }
     }
 }
@@ -120,8 +124,12 @@ impl Memoizable for TimeFormatter {
 enum TimeFormatterValues {
     #[l10n_message(".seconds", seconds)]
     Seconds { seconds: usize },
-    #[l10n_message(".minutes", minutes, seconds)]
-    Minutes { minutes: usize, seconds: String },
-    #[l10n_message(".hours", hours, minutes)]
-    Hours { hours: usize, minutes: String },
+    #[l10n_message(".minutes", minutes)]
+    Minutes { minutes: usize },
+    #[l10n_message(".minutes-seconds", minutes, seconds)]
+    MinutesSeconds { minutes: usize, seconds: String },
+    #[l10n_message(".hours", hours)]
+    Hours { hours: usize },
+    #[l10n_message(".hours-minutes", hours, minutes)]
+    HoursMinutes { hours: usize, minutes: String },
 }

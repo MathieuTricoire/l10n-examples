@@ -49,35 +49,37 @@ fn main() {
 fn run(lang: &LanguageIdentifier) {
     let username = "Alice";
     let greeting = message!("app", "greeting", username);
-    println!("{}", greeting.translate(&lang));
+    println!("{}", greeting.translate(lang));
 
     let status = Status::Busy("Working".to_string(), Gender::Female);
-    println!("{}", status.translate(&lang));
+    println!("{}", status.translate(lang));
 
     let status = Status::BusyFor(BusyFor {
         reason: "Break".to_string(),
         gender: Gender::Female,
         time: Time::minutes(125),
     });
-    println!("{}", status.translate(&lang));
+    println!("{}", status.translate(lang));
 
     let change_font_color = message!("settings", "change-font-color");
-    println!("{}", change_font_color.translate(&lang));
+    println!("{}", change_font_color.translate(lang));
 
     let colors = [Color::Gray, Color::Black, Color::White];
     for color in colors {
-        println!("- {}", color.translate(&lang));
+        println!("- {}", color.translate(lang));
     }
 
-    let launch_timer = message!("app", "launch-timer", "seconds" = 90);
-    println!("{}", launch_timer.translate(&lang));
     let launch_timer = message!("app", "launch-timer", "seconds" = 60);
-    println!("{}", launch_timer.translate(&lang));
+    println!("{}", launch_timer.translate(lang));
     let launch_timer = message!("app", "launch-timer", "seconds" = 65);
-    println!("{}", launch_timer.translate(&lang));
+    println!("{}", launch_timer.translate(lang));
+    let launch_timer = message!("app", "launch-timer", "seconds" = 120);
+    println!("{}", launch_timer.translate(lang));
+    let launch_timer = message!("app", "launch-timer", "seconds" = 150);
+    println!("{}", launch_timer.translate(lang));
 
     let order_a_pop = message!("app", "order-a-pop");
-    println!("{}", order_a_pop.translate(&lang));
+    println!("{}", order_a_pop.translate(lang));
 }
 
 #[allow(unused)]
